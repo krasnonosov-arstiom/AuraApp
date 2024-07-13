@@ -1,16 +1,16 @@
 package com.example.auraapp
 
 import android.app.Application
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
+import android.content.Intent
+import android.content.IntentFilter
 import com.example.auraapp.di.AppComponent
 import com.example.core.AppComponentHolder
 import com.example.core.AppComponentProvider
 import com.example.data.di.createDataProvider
 import com.example.domain.di.createUseCasesProvider
+import com.example.feature.eventreciever.EventReceiver
 
-class App: Application(), AppComponentHolder {
+class App : Application(), AppComponentHolder {
 
     private var _appComponentProvider: AppComponentProvider? = null
     override val appComponentProvider: AppComponentProvider
@@ -18,15 +18,13 @@ class App: Application(), AppComponentHolder {
             "AppComponentProvider hasn't been initialized"
         }
 
-    private val dataStore: DataStore<Preferences> by preferencesDataStore("AppDataStore")
-
     override fun onCreate() {
-        setUpDi()
         super.onCreate()
+        setUpDi()
     }
 
     private fun setUpDi() {
-        val dataProvider = createDataProvider(dataStore)
+        val dataProvider = createDataProvider(applicationContext)
         val useCasesProvider = createUseCasesProvider(dataProvider)
         _appComponentProvider = AppComponent.create(useCasesProvider)
     }

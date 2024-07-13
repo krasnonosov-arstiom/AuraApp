@@ -1,12 +1,11 @@
 package com.example.domain.repositories
 
+import com.example.domain.models.BootInfoModel
 import kotlinx.coroutines.flow.Flow
 
 interface NumberRepository {
 
-    suspend fun writeValue(value: Int)
+    suspend fun writeValue(newBootTime: Long)
 
-    suspend fun incrementValue()
-
-    fun getSavedNumbersStream(): Flow<Int>
+    fun getSavedNumbersStream(): Flow<BootInfoModel>
 }

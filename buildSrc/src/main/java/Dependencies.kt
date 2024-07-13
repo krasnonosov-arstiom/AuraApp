@@ -15,8 +15,10 @@ object Versions {
     const val glide = "4.13.0"
 
     const val dataStore = "1.1.1"
+    const val roomVersion = "2.6.1"
 
     const val lifecycleViewModel = "2.2.0"
+
 }
 
 object AndroidSdk {
@@ -43,6 +45,10 @@ object Libraries {
     const val dataStore = "androidx.datastore:datastore-preferences:${Versions.dataStore}"
 
     const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleViewModel}"
+
+    const val roomRuntime = "androidx.room:room-runtime:${Versions.roomVersion}"
+    const val roomKtx = "androidx.room:room-ktx:$${Versions.roomVersion}"
+    const val roomKaptCompiler = "androidx.room:room-compiler:${Versions.roomVersion}"
 }
 
 fun DependencyHandler.addCommonUiDependencies() {
@@ -73,12 +79,17 @@ fun DependencyHandler.addGlideDependencies() {
 }
 
 fun DependencyHandler.addFeatureDependencies() {
-//    implementation(Libraries.constraintLayout)
     implementation(Libraries.lifecycleViewModel)
     addCommonUiDependencies()
     addDaggerDependencies()
     addCoroutinesDependencies()
     addGlideDependencies()
+}
+
+fun DependencyHandler.addRoomDependencies() {
+    implementation(Libraries.roomRuntime)
+    implementation(Libraries.roomKtx)
+    kapt(Libraries.roomKaptCompiler)
 }
 
 private fun DependencyHandler.implementation(dependencyNotation: Any): Dependency? =

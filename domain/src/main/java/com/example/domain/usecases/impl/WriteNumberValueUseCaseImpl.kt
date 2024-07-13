@@ -8,7 +8,7 @@ internal class WriteNumberValueUseCaseImpl @Inject constructor(
     private val numberRepository: NumberRepository,
 ): WriteNumberValueUseCase {
 
-    override suspend fun invoke(value: Int) {
-        numberRepository.writeValue(value)
+    override suspend fun invoke(newBootTime: Long) {
+        numberRepository.writeValue(newBootTime)
     }
 }

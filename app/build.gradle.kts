@@ -39,6 +39,7 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":feature:mainscreen"))
+    implementation(project(":feature:eventreciever"))
 
     addDaggerDependencies()
     addCommonUiDependencies()

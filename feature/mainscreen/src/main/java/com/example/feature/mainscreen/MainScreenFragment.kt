@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import com.example.core.AppComponentProvider
@@ -32,11 +31,10 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding, MainScreenVie
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.increaseButton.setOnClickListener { viewModel.increaseNumber() }
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.getCurrentNumberStream().collect { state ->
                 when (state) {
-                    is MainScreenViewModel.State.Content -> binding.numberTextView.text = state.number
+                    is MainScreenViewModel.State.Content -> binding.numberTextView.text = state.textValue
                     is MainScreenViewModel.State.Undefined -> binding.numberTextView.text = "Something went wrong"
                 }
 

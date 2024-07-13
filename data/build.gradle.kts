@@ -35,5 +35,6 @@ dependencies {
     implementation(project(":domain"))
 
     addDaggerDependencies()
-    implementation(Libraries.dataStore)
+    addRoomDependencies()
+    addCoroutinesDependencies()
 }
